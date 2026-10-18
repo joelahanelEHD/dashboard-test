@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ENV 401 Assessment Dashboard</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap">
+      <p class="eyebrow">Program assessment · ENV 401 capstone</p>
+      <h1>Environmental Studies Assessment Dashboard</h1>
+      <p class="sub">Rubric scores for 60 sampled students on four dimensions (1–4 scale). A score of 3 or 4 counts as meeting expectations. <em>Synthetic workshop data. No records represent real students.</em></p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="toolbar" role="toolbar" aria-label="Filter">
+      <span class="toolbar-label" id="sec-label">Section</span>
+      <div class="segmented" id="section-filter" role="radiogroup" aria-labelledby="sec-label"></div>
+      <span class="toolbar-note" id="filter-note"></span>
+    </div>
+
+    <section class="kpis" id="kpis" aria-label="Key figures"></section>
+
+    <div class="grid">
+      <section class="card span-2">
+        <h2 id="meet-title">Percent meeting expectations by dimension</h2>
+        <p class="card-sub">Share of students scoring 3 or 4. The dashed line marks an illustrative 80% target.</p>
+        <div id="chart-meet" class="chart"></div>
+      </section>
+
+      <section class="card span-2">
+        <h2>Score distribution by dimension</h2>
+        <p class="card-sub">Scores below expectations (1–2) extend left of the line; scores meeting expectations (3–4) extend right.</p>
+        <div class="legend" id="dist-legend"></div>
+        <div id="chart-dist" class="chart"></div>
+      </section>
+
+      <section class="card">
+        <h2>Percent meeting, by section and dimension</h2>
+        <p class="card-sub">Stronger blue = more students meeting expectations. Click a row to filter.</p>
+        <div id="chart-heat" class="chart"></div>
+      </section>
+
+      <section class="card">
+        <h2>How many dimensions did each student meet?</h2>
+        <p class="card-sub">Number of students by count of dimensions scored 3 or higher.</p>
+        <div id="chart-count" class="chart"></div>
+      </section>
+
+      <section class="card span-2">
+        <div class="card-head">
+          <div>
+            <h2>Student scores</h2>
+            <p class="card-sub">Click a column header to sort. Scores below 3 are highlighted.</p>
+          </div>
+          <label class="check"><input type="checkbox" id="only-below"> Only students below expectations on at least one dimension</label>
+        </div>
+        <div class="table-wrap"><table id="student-table"></table></div>
+      </section>
+
+      <section class="card span-2 notes">
+        <h2>About these statistics</h2>
+        <ul>
+          <li><strong>Reliability.</strong> Cronbach's alpha is recalculated for the selected students. For all 60 it is 0.73, which is acceptable for a four-dimension rubric. It shows whether the dimensions move together, not whether raters agree.</li>
+          <li><strong>Dimension differences.</strong> For all 60 students, Systems Reasoning is significantly lower than Stakeholder Analysis and Recommendation (paired Wilcoxon tests, Holm-adjusted p &lt; .05).</li>
+          <li><strong>Section differences.</strong> None are statistically significant (Kruskal–Wallis p &gt; .20 for every dimension). With 15 students per section, treat gaps between sections as something to watch.</li>
+          <li><strong>Target.</strong> The program has not set a benchmark. The 80% line is illustrative; change <code>TARGET</code> in <code>app.js</code> to match your program's target.</li>
+        </ul>
+      </section>
+    </div>
+  </main>
+
+  <div id="tooltip" class="tooltip" role="tooltip" hidden></div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
